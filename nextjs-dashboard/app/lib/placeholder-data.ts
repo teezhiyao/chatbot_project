@@ -1,147 +1,42 @@
 // This file contains placeholder data that you'll be replacing with real data in the Data Fetching chapter:
-// https://nextjs.org/learn/dashboard-app/fetching-data
-const users = [
-  {
-    id: '410544b2-4001-4271-9855-fec4b6a6442a',
-    name: 'User',
-    email: 'user@nextmail.com',
-    password: '123456',
-  },
+
+const policyTiers = [
+  { tier_name: 'Basic', tier_description: 'Basic coverage' },
+  { tier_name: 'Standard', tier_description: 'Standard coverage' },
+  { tier_name: 'Premium', tier_description: 'Premium coverage' },
 ];
 
-const customers = [
-  {
-    id: 'd6e15727-9fe1-4961-8c5b-ea44a9bd81aa',
-    name: 'Evil Rabbit',
-    email: 'evil@rabbit.com',
-    image_url: '/customers/evil-rabbit.png',
-  },
-  {
-    id: '3958dc9e-712f-4377-85e9-fec4b6a6442a',
-    name: 'Delba de Oliveira',
-    email: 'delba@oliveira.com',
-    image_url: '/customers/delba-de-oliveira.png',
-  },
-  {
-    id: '3958dc9e-742f-4377-85e9-fec4b6a6442a',
-    name: 'Lee Robinson',
-    email: 'lee@robinson.com',
-    image_url: '/customers/lee-robinson.png',
-  },
-  {
-    id: '76d65c26-f784-44a2-ac19-586678f7c2f2',
-    name: 'Michael Novotny',
-    email: 'michael@novotny.com',
-    image_url: '/customers/michael-novotny.png',
-  },
-  {
-    id: 'CC27C14A-0ACF-4F4A-A6C9-D45682C144B9',
-    name: 'Amy Burns',
-    email: 'amy@burns.com',
-    image_url: '/customers/amy-burns.png',
-  },
-  {
-    id: '13D07535-C59E-4157-A011-F8D2EF4E0CBB',
-    name: 'Balazs Orban',
-    email: 'balazs@orban.com',
-    image_url: '/customers/balazs-orban.png',
-  },
+const policyHolders = [
+  { holder_name: 'John Doe', holder_address: '123 Elm St', holder_phone: '555-1234' },
+  { holder_name: 'Jane Smith', holder_address: '456 Oak St', holder_phone: '555-5678' },
+  { holder_name: 'Jim Brown', holder_address: '789 Pine St', holder_phone: '555-8765' },
 ];
 
-const invoices = [
-  {
-    customer_id: customers[0].id,
-    amount: 15795,
-    status: 'pending',
-    date: '2022-12-06',
-  },
-  {
-    customer_id: customers[1].id,
-    amount: 20348,
-    status: 'pending',
-    date: '2022-11-14',
-  },
-  {
-    customer_id: customers[4].id,
-    amount: 3040,
-    status: 'paid',
-    date: '2022-10-29',
-  },
-  {
-    customer_id: customers[3].id,
-    amount: 44800,
-    status: 'paid',
-    date: '2023-09-10',
-  },
-  {
-    customer_id: customers[5].id,
-    amount: 34577,
-    status: 'pending',
-    date: '2023-08-05',
-  },
-  {
-    customer_id: customers[2].id,
-    amount: 54246,
-    status: 'pending',
-    date: '2023-07-16',
-  },
-  {
-    customer_id: customers[0].id,
-    amount: 666,
-    status: 'pending',
-    date: '2023-06-27',
-  },
-  {
-    customer_id: customers[3].id,
-    amount: 32545,
-    status: 'paid',
-    date: '2023-06-09',
-  },
-  {
-    customer_id: customers[4].id,
-    amount: 1250,
-    status: 'paid',
-    date: '2023-06-17',
-  },
-  {
-    customer_id: customers[5].id,
-    amount: 8546,
-    status: 'paid',
-    date: '2023-06-07',
-  },
-  {
-    customer_id: customers[1].id,
-    amount: 500,
-    status: 'paid',
-    date: '2023-08-19',
-  },
-  {
-    customer_id: customers[5].id,
-    amount: 8945,
-    status: 'paid',
-    date: '2023-06-03',
-  },
-  {
-    customer_id: customers[2].id,
-    amount: 1000,
-    status: 'paid',
-    date: '2022-06-05',
-  },
+const policies = [
+  { policy_number: 'POL123', tier_id: 1, holder_id: 1, start_date: '2023-01-01', end_date: '2024-01-01' },
+  { policy_number: 'POL456', tier_id: 2, holder_id: 2, start_date: '2023-06-01', end_date: '2024-06-01' },
+  { policy_number: 'POL789', tier_id: 3, holder_id: 3, start_date: '2023-09-01', end_date: '2024-09-01' },
 ];
 
-const revenue = [
-  { month: 'Jan', revenue: 2000 },
-  { month: 'Feb', revenue: 1800 },
-  { month: 'Mar', revenue: 2200 },
-  { month: 'Apr', revenue: 2500 },
-  { month: 'May', revenue: 2300 },
-  { month: 'Jun', revenue: 3200 },
-  { month: 'Jul', revenue: 3500 },
-  { month: 'Aug', revenue: 3700 },
-  { month: 'Sep', revenue: 2500 },
-  { month: 'Oct', revenue: 2800 },
-  { month: 'Nov', revenue: 3000 },
-  { month: 'Dec', revenue: 4800 },
+const policyInfos = [
+  { policy_id: 1, info_details: 'Basic policy with minimal coverage' },
+  { policy_id: 2, info_details: 'Standard policy with additional benefits' },
+  { policy_id: 3, info_details: 'Premium policy with full coverage' },
 ];
 
-export { users, customers, invoices, revenue };
+const chats = [
+  { chat_name: 'Customer Support', created_at: '2024-07-15 10:00:00' },
+  { chat_name: 'Policy Inquiry', created_at: '2024-07-15 11:00:00' },
+  { chat_name: 'Claim Support', created_at: '2024-07-15 12:00:00' },
+];
+
+const messages = [
+  { chat_id: 1, sender_id: 1, content: 'Hello, I need help with my policy.', sent_at: '2024-07-15 10:01:00' },
+  { chat_id: 1, sender_id: 2, content: 'Sure, I can help you with that.', sent_at: '2024-07-15 10:02:00' },
+  { chat_id: 2, sender_id: 1, content: 'I have a question about my policy details.', sent_at: '2024-07-15 11:01:00' },
+  { chat_id: 2, sender_id: 2, content: 'Please provide your policy number.', sent_at: '2024-07-15 11:02:00' },
+  { chat_id: 3, sender_id: 1, content: 'I want to file a claim.', sent_at: '2024-07-15 12:01:00' },
+  { chat_id: 3, sender_id: 2, content: 'I will guide you through the claim process.', sent_at: '2024-07-15 12:02:00' },
+];
+
+export { policyTiers, policyHolders, policies, policyInfos, chats, messages };

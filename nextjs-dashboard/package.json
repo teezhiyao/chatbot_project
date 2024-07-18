@@ -6,8 +6,13 @@
     "start": "next start"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
     "@heroicons/react": "^2.1.4",
+    "@mui/icons-material": "^5.16.2",
+    "@mui/material": "^5.16.1",
     "@tailwindcss/forms": "^0.5.7",
+    "@vercel/node": "^3.2.6",
     "@vercel/postgres": "^0.8.0",
     "autoprefixer": "10.4.19",
     "bcrypt": "^5.1.1",

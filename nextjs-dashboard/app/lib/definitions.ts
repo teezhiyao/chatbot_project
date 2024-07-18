@@ -16,6 +16,18 @@ export type Customer = {
   image_url: string;
 };
 
+export type ChatMessage = {
+  message_id: number;
+  chat_id: number;
+  sender_id: number;
+  content: string;
+  sent_at: Date;
+}
+
+export type ChatLogs = {
+  messages: ChatMessage[];
+}
+
 export type Invoice = {
   id: string;
   customer_id: string;

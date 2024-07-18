@@ -1,20 +1,16 @@
-'use client';
+import ChatBot from "@/app/ui/chatbot/chat";
+import { fetchChatLogs } from "@/app/lib/data";
+import { ChatMessage } from "../lib/definitions";
 
-import dynamic from 'next/dynamic';
-import { useEffect } from 'react';
-
-// Dynamically import the Chatbox component to disable server-side rendering
-const Chatbox = dynamic(() => import('../ui/chatbot/chatbox'), { ssr: false });
-
-export default function Page() {
-  useEffect(() => {
-    fetch('/api/socket');
-  }, []);
-
+export default async function Page() {
+  // const data = await fetch("/api/chatlogs?cache-bust=" + Date.now());
+  // const chatlogs: ChatMessage[] = await data.json();
+  // console.log(chatlogs.length);
   return (
-    <div>
-      <h1>Chatbox</h1>
-      {/* <Chatbox /> */}
-    </div>
+    <main>
+      <ChatBot />
+    </main>
   );
 }
+
+export const revalidate = false;
