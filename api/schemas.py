@@ -3,25 +3,6 @@ from pydantic import BaseModel, Field
 from typing import Optional, List
 from datetime import date, datetime
 
-
-class PolicyTierBase(BaseModel):
-    policy_id: int
-    duration_month: Optional[int] = None
-    premium: str
-    payout: str
-    total_coverage: str
-
-class PolicyTierCreate(PolicyTierBase):
-    pass
-
-
-class PolicyTier(PolicyTierBase):
-    policy_id: int
-
-    class Config:
-        orm_mode = True
-
-
 class PolicyHolderBase(BaseModel):
     username: str
     password: Optional[str] = None
@@ -33,30 +14,28 @@ class PolicyHolderCreate(PolicyHolderBase):
 
 class PolicyHolder(PolicyHolderBase):
     holder_id: int
-    policies: List["Policy"] = []
+    policies: List["PolicyInstance"] = []
     messages: List["Messages"] = []
 
     class Config:
         orm_mode = True
 
 
-class PolicyBase(BaseModel):
+class PolicyInstanceBase(BaseModel):
     policy_name: str
-    policy_tier: Optional[int] = None
     user_id: int
     start_date: date
     end_date: date
     status: Optional[int] = None
 
 
-class PolicyCreate(PolicyBase):
+class PolicyInstanceCreate(PolicyInstanceBase):
     pass
 
 
-class Policy(PolicyBase):
+class PolicyInstance(PolicyInstanceBase):
     policy_id: int
     holder: PolicyHolder
-    tier: Optional[PolicyTier] = None
 
     class Config:
         orm_mode = True
@@ -64,9 +43,9 @@ class Policy(PolicyBase):
 
 class PolicyInfoBase(BaseModel):
     policy_name: str
-    product_type: Optional[str] = None
-    product_category: Optional[str] = None
-    description: Optional[str] = None
+    product_type: str = None
+    product_category: str = None
+    description: str = None
 
 
 class PolicyInfoCreate(PolicyInfoBase):
@@ -74,7 +53,7 @@ class PolicyInfoCreate(PolicyInfoBase):
 
 
 class PolicyInfo(PolicyInfoBase):
-    policy_name: str
+    policy_info_id: Optional[int] = None
 
     class Config:
         orm_mode = True
