@@ -1,6 +1,5 @@
-# schema.py
-from pydantic import BaseModel, Field
-from typing import Optional, List
+from pydantic import BaseModel
+from typing import List, Optional
 from datetime import date, datetime
 
 class PolicyHolderBase(BaseModel):
@@ -13,7 +12,7 @@ class PolicyHolderCreate(PolicyHolderBase):
 
 
 class PolicyHolder(PolicyHolderBase):
-    holder_id: int
+    user_id: int
     policies: List["PolicyInstance"] = []
     messages: List["Messages"] = []
 
@@ -22,7 +21,7 @@ class PolicyHolder(PolicyHolderBase):
 
 
 class PolicyInstanceBase(BaseModel):
-    policy_name: str
+    policy_info_id: int
     user_id: int
     start_date: date
     end_date: date
@@ -36,32 +35,32 @@ class PolicyInstanceCreate(PolicyInstanceBase):
 class PolicyInstance(PolicyInstanceBase):
     policy_id: int
     holder: PolicyHolder
+    info: "PolicyInfo"
 
     class Config:
         orm_mode = True
 
 
 class PolicyInfoBase(BaseModel):
-    policy_name: str
-    product_type: str = None
-    product_category: str = None
-    description: str = None
+    product_type: Optional[str] = None
+    product_category: Optional[str] = None
+    description: Optional[str] = None
 
 
 class PolicyInfoCreate(PolicyInfoBase):
-    pass
+    policy_name: str
 
 
 class PolicyInfo(PolicyInfoBase):
-    policy_info_id: Optional[int] = None
+    policy_info_id: int
+    instances: List[PolicyInstance] = []
 
     class Config:
         orm_mode = True
 
 
 class ChatBase(BaseModel):
-    chat_name: str
-    created_at: Optional[datetime] = None
+    user_id: int
 
 
 class ChatCreate(ChatBase):
@@ -70,7 +69,8 @@ class ChatCreate(ChatBase):
 
 class Chat(ChatBase):
     chat_id: int
-    messages: List["Messages"] = []
+    # messages: List["Messages"] = []
+    created_at: Optional[datetime] = None
 
     class Config:
         orm_mode = True
@@ -87,8 +87,8 @@ class MessagesCreate(MessagesBase):
 
 
 class Messages(MessagesBase):
-    message_id: Optional[int] = None
-    sent_at: Optional[date] = None
+    message_id: int
+    sent_at: Optional[datetime] = None
 
     class Config:
         orm_mode = True
