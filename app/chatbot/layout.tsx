@@ -1,4 +1,4 @@
-import ChatSideNav from "@/app/ui/chatbot/chatbot_sidenav";
+import ChatSideNav from "@/app/ui/chatbot/chatbot_drawer";
 import { Container, Box } from "@mui/material";
 
 export default function Layout({ children }: { children: React.ReactNode }) {

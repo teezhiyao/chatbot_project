@@ -4,7 +4,7 @@ from .database import SessionLocal, engine
 from sqlalchemy.orm import Session
 from fastapi.middleware.cors import CORSMiddleware
 from typing import List
-
+from . import data_processing
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
@@ -100,4 +100,6 @@ def delete_chat(chat_id: int, db: Session = Depends(get_db)):
 
 @app.post("/api/messages", response_model=schemas.Messages)
 def create_message(message: schemas.MessagesCreate, db: Session = Depends(get_db)):
-    return crud.create_message(message, db)
+    crud.create_message(message, db)
+    reply = data_processing.check_common_reply(message.content,db)
+    return reply

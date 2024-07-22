@@ -1,13 +1,10 @@
-import ChatLog from '@/app/ui/dashboard/chatLog';
-// import { lusitana } from '@/app/ui/fonts';
-import { fetchChatLogs } from '@/app/lib/data';
+import ChatBot from "@/app/ui/chatbot/chat";
 
 export default async function Page() {
-  const chatlogs = await fetchChatLogs();
-  console.log(chatlogs)
-  return (
-    <main>
-      <ChatLog chatlogs={chatlogs}  />
-    </main>
-  );
+  // const data = await fetch("/api/chatlogs?cache-bust=" + Date.now());
+  // const chatlogs: ChatMessage[] = await data.json();
+  // console.log(chatlogs.length);
+  return <ChatBot />;
 }
+
+export const revalidate = false;

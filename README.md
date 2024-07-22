@@ -9,4 +9,7 @@ To start frontend / nextjs
 - pnpm run dev
 
 To start backend / fastapi:
-fastapi dev api/index.py
+
+- fastapi dev api/index.py
+
+To start mysql server, check windows service

@@ -24,7 +24,9 @@ export default function ChatBot() {
     fetchMessages();
   }, []);
 
-  const handleSend = (event: MouseEvent<HTMLButtonElement>): void => {
+  const handleSend = async (
+    event: MouseEvent<HTMLButtonElement>
+  ): Promise<void> => {
     event.preventDefault();
     // console.log("Button clicked");
     if (message.trim()) {
@@ -37,9 +39,7 @@ export default function ChatBot() {
         sent_at: new Date(),
       };
 
-      async function sendMessage(msg: ChatMessage) {
-        console.log(JSON.stringify(msg));
-        console.log(msg);
+      async function sendMessage(msg: ChatMessage): Promise<ChatMessage> {
         const res = await fetch("/api/messages/", {
           method: "POST",
           headers: {
@@ -47,12 +47,14 @@ export default function ChatBot() {
           },
           body: JSON.stringify(msg),
         });
+        const data = await res.json();
+        return data as ChatMessage;
       }
 
-      sendMessage(msg);
+      const reply: ChatMessage = await sendMessage(msg);
 
       setSentMessages((currentMessages) =>
-        currentMessages ? [...currentMessages, msg] : [msg]
+        currentMessages ? [...currentMessages, msg, reply] : [msg, reply]
       );
 
       setMessage("");
@@ -61,6 +63,13 @@ export default function ChatBot() {
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setMessage(event.target.value);
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === "Enter") {
+      event.preventDefault(); // Prevent form submission
+      handleSend;
+    }
   };
 
   return (
@@ -74,13 +83,14 @@ export default function ChatBot() {
           padding: "16px", // Optional: padding inside the container
         }}
       >
-        <ChatHistory messages={sent_messages} />
+        <ChatHistory messages={sent_messages} />s
       </Box>
-      <Grid container sx={{ flexGrow: 1 }}>
+      <Grid container sx={{ flexGrow: 1 }} component="form">
         <Grid xs={10}>
           <TextField
             label="Type a message"
             onChange={handleChange}
+            onKeyDown={handleKeyDown}
             variant="outlined"
             value={message}
             fullWidth
@@ -93,6 +103,7 @@ export default function ChatBot() {
             endIcon={<SendIcon />}
             onClick={handleSend}
             className="bg-blue-500 hover:bg-blue-700 text-white"
+            type="submit"
           >
             Sends
           </Button>
