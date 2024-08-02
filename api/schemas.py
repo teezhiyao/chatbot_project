@@ -34,8 +34,7 @@ class PolicyInstanceCreate(PolicyInstanceBase):
 
 class PolicyInstance(PolicyInstanceBase):
     policy_id: int
-    holder: PolicyHolder
-    info: "PolicyInfo"
+    username: Optional[str] = None
 
     class Config:
         orm_mode = True
@@ -45,14 +44,15 @@ class PolicyInfoBase(BaseModel):
     product_type: Optional[str] = None
     product_category: Optional[str] = None
     description: Optional[str] = None
-
-
-class PolicyInfoCreate(PolicyInfoBase):
     policy_name: str
 
 
+class PolicyInfoCreate(PolicyInfoBase):
+    pass
+
+
 class PolicyInfo(PolicyInfoBase):
-    policy_info_id: int
+    policy_info_id: int = -1
     instances: List[PolicyInstance] = []
 
     class Config:
@@ -70,7 +70,7 @@ class ChatCreate(ChatBase):
 class Chat(ChatBase):
     chat_id: int
     # messages: List["Messages"] = []
-    created_at: Optional[datetime] = None
+    created_at: Optional[datetime] = datetime.now()
 
     class Config:
         orm_mode = True
@@ -88,7 +88,7 @@ class MessagesCreate(MessagesBase):
 
 class Messages(MessagesBase):
     message_id: int
-    sent_at: Optional[datetime] = None
+    sent_at: Optional[datetime] = datetime.now()
 
     class Config:
         orm_mode = True

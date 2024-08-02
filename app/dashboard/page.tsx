@@ -1,10 +1,8 @@
 import ChatBot from "@/app/ui/chatbot/chat";
+import PolicyForm from "../ui/dashboard/policy_info/info_create";
 
 export default async function Page() {
-  // const data = await fetch("/api/chatlogs?cache-bust=" + Date.now());
-  // const chatlogs: ChatMessage[] = await data.json();
-  // console.log(chatlogs.length);
-  return <ChatBot />;
+  return <PolicyForm />;
 }
 
 export const revalidate = false;

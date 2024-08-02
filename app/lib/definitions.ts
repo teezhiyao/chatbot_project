@@ -25,31 +25,31 @@ export interface PolicyHolder {
   holder_id: number;
   username: string;
   password: string;
-  policies?: Policy[];
+  policies?: PolicyInstance[];
   messages?: ChatMessage[];
 }
 
 // Policy interface
-export interface Policy {
+export interface PolicyInstance {
   policy_id: number;
-  policy_name: string;
-  policy_tier?: number;
+  policy_info_id: number;
   user_id: number;
   start_date: string; // Using string to represent date in ISO format
   end_date: string; // Using string to represent date in ISO format
   status: number;
+  username: number;
   holder?: PolicyHolder;
-  tier?: PolicyTier;
   info?: PolicyInfo;
 }
 
 // PolicyInfo interface
 export interface PolicyInfo {
+  policy_info_id: number;
   policy_name: string;
   product_type: string;
   product_category: string;
   description: string;
-  policies?: Policy[];
+  policies?: PolicyInstance[];
 }
 
 // Chat interface

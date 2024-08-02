@@ -4,7 +4,13 @@ import { ChatMessage } from "@/app/lib/definitions";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import SendIcon from "@mui/icons-material/Send";
-import React, { useState, ChangeEvent, MouseEvent, useEffect } from "react";
+import React, {
+  useState,
+  ChangeEvent,
+  MouseEvent,
+  useEffect,
+  useRef,
+} from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Unstable_Grid2";
 import ChatHistory from "./chathistory"; // Adjust the import path as necessary
@@ -13,6 +19,7 @@ export default function ChatBot() {
   const [message, setMessage] = useState<string>("");
   const [sent_messages, setSentMessages] = useState<ChatMessage[]>();
   // const [messages, setMessages] = useState("")
+  // const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     async function fetchMessages() {
@@ -22,10 +29,14 @@ export default function ChatBot() {
     }
 
     fetchMessages();
+
+    // if (containerRef.current) {
+    //   containerRef.current.scrollTop = containerRef.current.scrollHeight;
+    // }
   }, []);
 
   const handleSend = async (
-    event: MouseEvent<HTMLButtonElement>
+    event: MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLDivElement>
   ): Promise<void> => {
     event.preventDefault();
     // console.log("Button clicked");
@@ -66,15 +77,17 @@ export default function ChatBot() {
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    console.log("in key down");
     if (event.key === "Enter") {
       event.preventDefault(); // Prevent form submission
-      handleSend;
+      handleSend(event);
     }
   };
 
   return (
     <Box>
       <Box
+        // ref={containerRef}
         sx={{
           width: "100%", // Full width of the parent
           height: "90vh", // Fixed height for scrollable area

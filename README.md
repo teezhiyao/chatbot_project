@@ -10,6 +10,7 @@ To start frontend / nextjs
 
 To start backend / fastapi:
 
+- .\env\Scripts\activate
 - fastapi dev api/index.py
 
 To start mysql server, check windows service

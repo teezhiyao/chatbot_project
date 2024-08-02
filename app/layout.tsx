@@ -1,5 +1,5 @@
 import "@/app/ui/global.css";
-import ChatSideNav from "@/app/ui/chatbot/chatbot_drawer";
+import ChatSideNav from "@/app/ui/side_nav";
 import { Container, Box } from "@mui/material";
 // export default function RootLayout({
 //   children,

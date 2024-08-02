@@ -1,4 +1,4 @@
-import ChatSideNav from "@/app/ui/chatbot/chatbot_drawer";
+import ChatSideNav from "@/app/ui/side_nav";
 import { Container, Box } from "@mui/material";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
@@ -11,13 +11,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         sx={{
           flexGrow: 1, // Allow the content to take remaining space
           p: 3, // Padding
-          overflowY: "auto", // Enable vertical scrolling if needed
+          // overflowY: "auto", // Enable vertical scrolling if needed
           bgcolor: "background.gray", // MUI background color
         }}
       >
-        {/* <Container>{children}</Container> */}
         {children}
-        {/* <Box>{children}</Box> */}
       </Box>
     </div>
   );

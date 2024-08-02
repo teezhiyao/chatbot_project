@@ -1,5 +1,5 @@
 # models.py
-from sqlalchemy import Boolean, Column, Date, ForeignKey, Integer, String, Text, TIMESTAMP, func
+from sqlalchemy import Boolean, Column, Date, ForeignKey, Integer, String, Text, TIMESTAMP, func, DateTime
 from sqlalchemy.orm import relationship
 from .database import Base
 
@@ -44,7 +44,7 @@ class Chat(Base):
 
     chat_id = Column(Integer, primary_key=True, autoincrement=True)
     user_id = Column(Integer, ForeignKey("PolicyHolder.user_id"), nullable=False)
-    created_at = Column(Date)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     rchat_id = relationship("Messages", back_populates="rchat_id")
     rholder_id = relationship("PolicyHolder", back_populates="rholder_id2")
@@ -57,6 +57,6 @@ class Messages(Base):
     chat_id = Column(Integer, ForeignKey("Chat.chat_id"), nullable=False)
     sender_id = Column(Integer, ForeignKey("PolicyHolder.user_id"), nullable=False)
     content = Column(String(200), nullable=False)
-    sent_at = Column(Date)
+    sent_at = Column(DateTime(timezone=True), server_default=func.now())
 
     rchat_id = relationship("Chat", back_populates="rchat_id")

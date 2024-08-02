@@ -1,4 +1,4 @@
-import ChatSideNav from "@/app/ui/chatbot/chatbot_drawer";
+import ChatSideNav from "@/app/ui/side_nav";
 import { Container, Box } from "@mui/material";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
@@ -15,9 +15,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           bgcolor: "background.gray", // MUI background color
         }}
       >
-        {/* <Container>{children}</Container> */}
         {children}
-        {/* <Box>{children}</Box> */}
       </Box>
     </div>
   );

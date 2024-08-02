@@ -1,19 +1,39 @@
 import React, { useEffect, useRef, useState } from "react";
-import { ChatMessage } from "@/app/lib/definitions"; // Adjust the import path as necessary
+import { ChatMessage, PolicyInfo, PolicyInstance } from "@/app/lib/definitions"; // Adjust the import path as necessary
 import Grid from "@mui/material/Unstable_Grid2";
 
 interface ChatHistoryProps {
   messages: ChatMessage[] | undefined;
 }
 
-const ChatHistory: React.FC<ChatHistoryProps> = ({ messages }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
+const ChatlogComponent: React.FC<ChatHistoryProps> = ({ messages }) => {
+  // const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+  //   setValue(newValue);
+  //   console.log(newValue);
+  //   fetchMessages(newValue + 1);
+  // };
 
-  useEffect(() => {
-    if (containerRef.current) {
-      containerRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  }, [messages]);
+  const extractPolicyInstance = (messages: any): PolicyInstance => {
+    const {
+      policy_info_id,
+      user_id,
+      start_date,
+      end_date,
+      status,
+      username,
+      policy_id,
+    } = messages;
+
+    return {
+      policy_info_id,
+      user_id,
+      start_date,
+      end_date,
+      status,
+      username,
+      policy_id,
+    };
+  };
 
   return (
     <div>
@@ -36,16 +56,10 @@ const ChatHistory: React.FC<ChatHistoryProps> = ({ messages }) => {
                 }`,
               }}
             >
-              {/* <div className="text-gray-700">{msg.content}</div> */}
-              <div
-                className="text-gray-700"
-                dangerouslySetInnerHTML={{ __html: msg.content }}
-              />
+              <div className="text-gray-700">{msg.content}</div>
               <div className="text-right">
                 <span style={{ fontSize: "12px", color: "#4a4a4a" }}>
                   {(msg.sender_id === -1 ? " AI at " : " User at ") +
-                    new Date(msg.sent_at).toDateString() +
-                    " " +
                     new Date(msg.sent_at).toTimeString()}
                 </span>
               </div>
@@ -55,9 +69,8 @@ const ChatHistory: React.FC<ChatHistoryProps> = ({ messages }) => {
       ) : (
         <div>No messages</div>
       )}
-      <div ref={containerRef}></div>
     </div>
   );
 };
 
-export default ChatHistory;
+export default ChatlogComponent;
